@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "../include/altimeter.h"
-#include "../include/apogee_detector.h"
+#include "../lib/apogee_detector/apogee_detector.h"
 
 void setup() {
   // put your setup code here, to run once:

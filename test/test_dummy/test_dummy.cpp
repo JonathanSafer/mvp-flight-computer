@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../../include/apogee_detector.h"
+#include "apogee_detector.h"
 // uncomment line below if you plan to use GMock
 // #include <gmock/gmock.h>
 

@@ -1,4 +1,4 @@
-#include "../include/apogee_detector.h"
+#include "apogee_detector.h"
 
 bool check_apogee(double last_altitude) {
     // Check if the altitude has decreased from the last measurement
@@ -7,7 +7,7 @@ bool check_apogee(double last_altitude) {
 
     static double previous_altitude = 0.0;
 
-    if (last_altitude - 1 <= previous_altitude) {
+    if (last_altitude <= previous_altitude - 1) {
         previous_altitude = last_altitude;
         return true; // Apogee detected
     }
