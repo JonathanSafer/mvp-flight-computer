@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include "../include/altimeter.h"
+#include "../include/apogee_detector.h"
 
 void setup() {
   // put your setup code here, to run once:
@@ -19,13 +21,16 @@ void loop() {
   // read altitude from the altimeter
   // check what state of flight we're in
   
-  float last_altitude = sample_altimeter();
-  float altitude = sample_altimeter();
-  while (altitude >= last_altitude) {
-    last_altitude = altitude;
-    altitude = sample_altimeter();
+  double last_altitude = sample_altimeter();
+  bool altitude_reached = check_apogee(last_altitude);
+  if (altitude_reached) {
+    // deploy parachute
+    // print message to serial monitor
   }
-  deploy_parachute();
+
+
+  // multiple decreases in a row
+  // altitude decreases by a certain amount (% or hardcoded value)
 
   // how do we determine if apogee has occured?
   // if current altitude is lower than prior measurement, apogee has been reached
