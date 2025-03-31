@@ -7,11 +7,27 @@
 // TEST_F(...)
 
 // verify that apogee detector does not detect apogee immidiately on first measurement
-TEST(DummyTest, BasicAssertions) {
+TEST(ApogeeDetection, Initialization) {
     // You can do assertion like this
     double initial_alt = 1;
     bool result = check_apogee(initial_alt);
     EXPECT_FALSE(result);
+}
+
+// verify that apogee detector detects apogee after apogee has been reached (altitude decreasing)
+TEST(ApogeeDetection, SimpleFlight) {
+    // You can do assertion like this
+    double basic_trajectory[] = {1, 1, 1, 10, 20, 30, 50, 50, 40, 30, 10, 0};
+    for (int i = 0; i < 12; i++) {
+        bool apogee_detected = false;
+        if(check_apogee(basic_trajectory[i]))
+            apogee_detected = true;
+        if (i < 6) {
+            EXPECT_FALSE(apogee_detected); // Apogee should not be detected while climbing
+        } else if (i > 7) {
+            EXPECT_TRUE(apogee_detected); // Apogee should have been detected at least once after descent begins
+        }
+    }
 }
 
 #if defined(ARDUINO)
